@@ -1,10 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div v-if="notIsLoginPage"><NavBar /></div>
+    <router-view/>
 </template>
+
+<script>
+import NavBar from './components/NavBar.vue'
+import router from './router'
+export default {
+  data() {
+    return{
+      
+    }
+  },
+  components: {
+    NavBar
+  },
+
+  computed: {
+    notIsLoginPage() {
+      return this.$route.name !== 'login'
+    },
+  },
+}
+</script>
 
 <style>
 #app {
