@@ -12,7 +12,7 @@
         <label for="floatingPassword">Data de conclusão</label>
       </div>
 
-      <button class="w-100 btn btn-lg btn-primary" type="submit" @click="CreateTask()">Cadastrar</button>
+      <button class="w-100 btn btn-lg btn-primary" type="button" @click="CreateTask()">Cadastrar</button>
     </form>
   </div>
 </template>
