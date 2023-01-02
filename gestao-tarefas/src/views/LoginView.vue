@@ -20,49 +20,48 @@
 </template>
 
 <script>
-import api from '@/services/api'
-import router from '@/router'
+////import api from '@/services/api'
+//import router from '@/vue'
+//import firebase from 'firebase/auth'
+//import { ref } from 'vue'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 export default {
     name: 'LoginView',
 
     data() {
       return {
         email: null,
-        password: null
+        password: null,
       }
     },
 
     methods: {
-      loginObject() {
-        let dataLogin = {
-          email: this.email,
-          password: this.password
-        }
-
-        this.loginConexao(dataLogin)
-      },
-
-      async loginConexao(data) {
-        await api.post('login',data)
-        .then((response) => {
-          let token = response.data.accessToken
-          let user = JSON.stringify(response.data.user) 
-          
-          if(token) {
-            const userObject = {
-              'user': user,
-              'accessToken': token
+      async loginObject() {
+        const auth = getAuth();
+        await signInWithEmailAndPassword(auth, this.email, this.password)
+          .then((userCredential) => {
+            // Signed in 
+            const userResponse = userCredential.user;
+            console.log(user)
+            
+            const userData = {
+              access_token: userResponse.access_token,
+              id: userResponse.uid,
+              refresh_token: userResponse.refreshToken 
             }
-            localStorage.setItem('user',JSON.stringify(userObject))
-        
 
-            router.push('/home')
-          }
-        })
-        .catch((err) => {
-          console.log(err.response.data)
-        })
-      }
+            let user = JSON.stringify(userData)
+            localStorage.setItem('user', user)
+            this.$router.push('/home')
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+          });
+      },
     }
 
 }
