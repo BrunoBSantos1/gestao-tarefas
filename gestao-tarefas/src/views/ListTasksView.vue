@@ -67,9 +67,6 @@ export default {
             .catch((error) => {
                 console.log('error: ',error);
             })
-            .then( () => {
-                // always executed
-            });
         },
 
         async deleteTask(id) {

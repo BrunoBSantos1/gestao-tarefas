@@ -88,8 +88,8 @@
 
     mounted() {
         let user = JSON.parse(localStorage.getItem('user'))
-        let userId = JSON.parse(user.user)
-        this.idUser = userId.id
+        let userId = user.id
+        this.idUser = userId
         this.getTask()
       },
   
