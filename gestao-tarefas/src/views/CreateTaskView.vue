@@ -39,16 +39,17 @@ export default {
         userId: this.idUser
       }
       this.createTexkConexao(taksObject)
-
-      router.push('/list-tasks')
     },
 
     async createTexkConexao(data) {
-      try {
-        const req = await api.post('tasks', data);
-      } catch (error) {
-        console.log(error)
-      }
+      await api.post('tasks',data)
+            .then((response) => {
+                if(response.status === 201)
+                  this.$router.push('/list-tasks')
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
   },
 
