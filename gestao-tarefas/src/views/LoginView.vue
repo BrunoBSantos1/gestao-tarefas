@@ -40,10 +40,8 @@ export default {
       async loginObject() {
         const auth = getAuth();
         await signInWithEmailAndPassword(auth, this.email, this.password)
-          .then((userCredential) => {
-            // Signed in 
+          .then((userCredential) => { 
             const userResponse = userCredential.user;
-            console.log(user)
             
             const userData = {
               access_token: userResponse.access_token,
@@ -54,12 +52,10 @@ export default {
             let user = JSON.stringify(userData)
             localStorage.setItem('user', user)
             this.$router.push('/home')
-            // ...
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            // ..
           });
       },
     }
