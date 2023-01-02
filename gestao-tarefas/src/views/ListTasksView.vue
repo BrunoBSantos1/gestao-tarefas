@@ -4,7 +4,6 @@
         <table class="table" >
         <thead>
             <tr>
-            <th scope="col">#</th>
             <th scope="col">Nome</th>
             <th scope="col">Data para Execução</th>
             <th scope="col">Status</th>
@@ -13,7 +12,6 @@
         </thead>
         <tbody>
             <tr v-for="task in tasks" :key="task.id">
-            <th scope="row">{{ task.id }}</th>
             <td>{{ task.name }}</td>
             <td>{{ task.dataConclusao }}</td>
             <td>{{ task.status }}</td>
